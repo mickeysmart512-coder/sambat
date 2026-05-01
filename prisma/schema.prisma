@@ -1,0 +1,77 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  phone         String?
+  password      String?
+  role          String    @default("USER") // USER or ADMIN
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  bookings      Booking[]
+}
+
+model Booking {
+  id            String   @id @default(cuid())
+  fullName      String
+  email         String
+  phone         String?
+  eventDate     String
+  eventTime     String?
+  eventType     String
+  state         String?
+  location      String
+  venue         String?
+  message       String?
+  totalPrice    Float    @default(0)
+  isNegotiated  Boolean  @default(false)
+  agreedPrice   Float?
+  status        String   @default("PENDING") // PENDING, CONFIRMED, REJECTED
+  userId        String?
+  user          User?    @relation(fields: [userId], references: [id])
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Tour {
+  id        String   @id @default(cuid())
+  date      String   // For display: e.g., "MAY 15"
+  dateTime  DateTime? // For dynamic live logic
+  city      String
+  venue     String
+  status    String   @default("TICKETS") // TICKETS, SOLD OUT, LIVE
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model StatePrice {
+  id        String   @id @default(cuid())
+  stateName String   @unique
+  price     Float
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model NegotiationCode {
+  id          String   @id @default(cuid())
+  code        String   @unique
+  price       Float
+  expiresAt   DateTime
+  isUsed      Boolean  @default(false)
+  createdAt   DateTime @default(now())
+}
+
+model Setting {
+  id    String @id @default(cuid())
+  key   String @unique // e.g., "price_birthday", "travel_fee"
+  value String
+}
+

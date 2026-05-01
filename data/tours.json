@@ -1,0 +1,6 @@
+[
+  { "id": 1, "date": "MAY 15", "city": "LAGOS", "venue": "EKO HOTEL", "status": "SOLD OUT" },
+  { "id": 2, "date": "MAY 22", "city": "ABUJA", "venue": "TRANSCORP HILTON", "status": "TICKETS" },
+  { "id": 3, "date": "JUN 05", "city": "PORT HARCOURT", "venue": "AZTECH ARCUM", "status": "TICKETS" },
+  { "id": 4, "date": "JUN 12", "city": "IBADAN", "venue": "JOGOR CENTRE", "status": "TICKETS" }
+]
