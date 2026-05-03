@@ -17,12 +17,19 @@ export default function Gallery() {
   }, []);
 
   return (
-    <section id="gallery" style={{ padding: 'clamp(2rem, 5vw, 4rem) 0', background: '#050505' }}>
+    <section id="gallery" className="section-padding" style={{ background: '#050505' }}>
       <div className="container">
+        <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
+          <h2 style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', fontWeight: 900, marginBottom: '1rem' }}>
+            LIVE <span className="neon-text-pink">HIGHLIGHTS</span>
+          </h2>
+          <p style={{ color: '#888' }}>Visual proof of the energy DJ Sambat brings to every stage.</p>
+        </div>
+        
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(clamp(280px, 100%, 350px), 1fr))',
-          gap: '1.5rem',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(clamp(300px, 100%, 400px), 1fr))',
+          gap: '2rem',
         }}>
           {loading ? (
             // Skeleton State

@@ -1,10 +1,9 @@
 'use client';
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { createClient } from '@/lib/supabase/client';
-import AuthModal from './AuthModal';
 
 export default function Hero() {
-  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [user, setUser] = useState<any>(null);
   const supabase = createClient();
 
@@ -16,109 +15,81 @@ export default function Hero() {
     checkUser();
   }, []);
 
-  const handleBookClick = () => {
-    if (user) {
-      window.location.href = '/booking';
-    } else {
-      setIsAuthModalOpen(true);
-    }
-  };
-
   return (
-    <section style={{
-      height: '100vh',
-      width: '100%',
-      position: 'relative',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      overflow: 'hidden'
+    <section style={{ 
+      position: 'relative', 
+      minHeight: '100vh', 
+      display: 'flex', 
+      alignItems: 'center', 
+      overflow: 'hidden',
+      background: '#000'
     }}>
-      <AuthModal isOpen={isAuthModalOpen} onClose={() => setIsAuthModalOpen(false)} />
-      
-      {/* Background Image with Overlay */}
+      {/* Cinematic Background Overlay */}
       <div style={{
         position: 'absolute',
         top: 0,
         left: 0,
         width: '100%',
         height: '100%',
-        backgroundImage: 'url("/hero-bg.png")', 
+        background: `linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.9)), url('https://images.unsplash.com/photo-1571266028243-3716f02d2d2e?q=80&w=2070&auto=format&fit=crop')`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        zIndex: -1
-      }} />
-      
-      <div style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        background: 'radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.8) 100%)',
-        zIndex: 0
+        zIndex: 1
       }} />
 
-      <div className="container" style={{
-        position: 'relative',
-        zIndex: 1,
-        textAlign: 'center'
-      }}>
-        <h2 style={{
-          fontSize: 'clamp(0.8rem, 3vw, 1.2rem)',
-          color: 'var(--accent-blue)',
-          fontWeight: 700,
-          letterSpacing: 'clamp(2px, 5vw, 5px)',
-          marginBottom: '1rem',
-          textTransform: 'uppercase'
-        }}>The State's Finest</h2>
-        
-        <h1 className="section-title" style={{ fontSize: 'clamp(2.5rem, 15vw, 6rem)', lineHeight: '0.9' }}>
-          DJ <span className="text-gradient">SAMBAT</span>
-        </h1>
-        
-        <p style={{
-          fontSize: 'clamp(0.9rem, 4vw, 1.25rem)',
-          maxWidth: '600px',
-          margin: '1.5rem auto',
-          color: '#ccc',
-          fontWeight: 400,
-          padding: '0 1rem'
+      <div className="container" style={{ position: 'relative', zIndex: 2 }}>
+        <div style={{ maxWidth: '900px' }}>
+          <p className="fade-in neon-text-blue" style={{ fontWeight: 800, letterSpacing: '0.3em', marginBottom: '1.5rem', fontSize: '0.9rem' }}>
+            THE STATE'S FINEST
+          </p>
+          <h1 className="fade-in" style={{ 
+            fontSize: 'clamp(3.5rem, 10vw, 8rem)', 
+            lineHeight: 0.9, 
+            marginBottom: '2rem',
+            fontWeight: 900
+          }}>
+            DJ <span className="neon-text-gold">SAMBAT</span>
+          </h1>
+          <p className="fade-in" style={{ 
+            fontSize: 'clamp(1rem, 2vw, 1.5rem)', 
+            color: '#ccc', 
+            marginBottom: '3rem',
+            maxWidth: '600px',
+            lineHeight: 1.6
+          }}>
+            Hypeman • Party Viber • Vibe Controller.<br/>
+            <span style={{ color: '#fff', fontWeight: 600 }}>Bringing the heat to every stage, every club, every moment.</span>
+          </p>
+          
+          <div className="fade-in" style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
+            <Link href={user ? "/booking" : "/auth"} className="btn-neon-blue">BOOK THE EXPERIENCE</Link>
+            <Link href="/experiences" className="btn-neon-outline">WATCH LIVE</Link>
+          </div>
+        </div>
+
+        {/* Stats Row */}
+        <div className="fade-in" style={{ 
+          marginTop: '6rem', 
+          display: 'grid', 
+          gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', 
+          gap: '3rem',
+          borderTop: '1px solid var(--glass-border)',
+          paddingTop: '3rem'
         }}>
-          Hypeman • Party Viber • Vibe Controller. <br/>
-          Bringing the heat to every stage, every club, every moment.
-        </p>
-        
-        <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', padding: '0 1rem' }}>
-          <button 
-            className="btn-primary" 
-            style={{ padding: '0.8rem 1.5rem', fontSize: '0.8rem', width: 'clamp(200px, 100%, 250px)' }}
-            onClick={handleBookClick}
-          >
-            Book The Experience
-          </button>
-          <button className="btn-secondary" style={{ padding: '0.8rem 1.5rem', fontSize: '0.8rem', width: 'clamp(200px, 100%, 250px)' }}>Watch Live</button>
+          <div>
+            <h3 style={{ fontSize: '2.5rem', color: 'var(--accent-blue)', marginBottom: '0.5rem' }}>100+</h3>
+            <p style={{ fontSize: '0.8rem', color: '#888', fontWeight: 600, letterSpacing: '0.1em' }}>SHOWS PER YEAR</p>
+          </div>
+          <div>
+            <h3 style={{ fontSize: '2.5rem', color: 'var(--accent-gold)', marginBottom: '0.5rem' }}>15+</h3>
+            <p style={{ fontSize: '0.8rem', color: '#888', fontWeight: 600, letterSpacing: '0.1em' }}>CITIES VISITED</p>
+          </div>
+          <div>
+            <h3 style={{ fontSize: '2.5rem', color: 'var(--accent-pink)', marginBottom: '0.5rem' }}>50K+</h3>
+            <p style={{ fontSize: '0.8rem', color: '#888', fontWeight: 600, letterSpacing: '0.1em' }}>FANS ENERGIZED</p>
+          </div>
         </div>
       </div>
-
-      {/* Decorative elements */}
-      <div style={{
-        position: 'absolute',
-        bottom: '50px',
-        left: '50%',
-        transform: 'translateX(-50%)',
-        animation: 'bounce 2s infinite'
-      }}>
-        <div style={{ width: '2px', height: '60px', background: 'linear-gradient(to bottom, var(--accent-gold), transparent)' }} />
-      </div>
-
-      <style jsx>{`
-        @keyframes bounce {
-          0%, 20%, 50%, 80%, 100% {transform: translateY(0) translateX(-50%);}
-          40% {transform: translateY(-10px) translateX(-50%);}
-          60% {transform: translateY(-5px) translateX(-50%);}
-        }
-      `}</style>
     </section>
   );
 }

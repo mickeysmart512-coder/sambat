@@ -77,8 +77,11 @@ export default function Navigation() {
           alignItems: 'center',
           transition: 'transform 0.3s ease',
         }} className={`nav-links ${isOpen ? 'active' : ''}`}>
-          <Link href="/about" onClick={() => setIsOpen(false)} style={{ fontWeight: 600, fontSize: '0.85rem' }}>ABOUT</Link>
-          <Link href="/tour" onClick={() => setIsOpen(false)} style={{ fontWeight: 600, fontSize: '0.85rem' }}>TOUR</Link>
+          <Link href="/" onClick={() => setIsOpen(false)} style={{ fontWeight: 600, fontSize: '0.8rem' }}>HOME</Link>
+          <Link href="/about" onClick={() => setIsOpen(false)} style={{ fontWeight: 600, fontSize: '0.8rem' }}>BIO</Link>
+          <Link href="/experiences" onClick={() => setIsOpen(false)} style={{ fontWeight: 600, fontSize: '0.8rem' }}>GALLERY</Link>
+          <Link href="/music" onClick={() => setIsOpen(false)} style={{ fontWeight: 600, fontSize: '0.8rem' }}>MUSIC</Link>
+          <Link href="/tour" onClick={() => setIsOpen(false)} style={{ fontWeight: 600, fontSize: '0.8rem' }}>TOUR</Link>
           
           <div style={{ 
             display: 'flex', 
@@ -87,14 +90,11 @@ export default function Navigation() {
             borderLeft: '1px solid var(--glass-border)', 
             paddingLeft: '1.5rem' 
           }} className="nav-socials">
-            <a href="https://www.instagram.com/dj.sambat?igsh=MWhnNWRneWZzdDhpOA==" target="_blank" title="Instagram">
+            <a href="https://www.instagram.com/dj.sambat?igsh=MWhnNWRneWZzdDhpOA==" target="_blank" title="Instagram" style={{ color: 'inherit' }}>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
             </a>
-            <a href="https://www.tiktok.com/@djsambat?is_from_webapp=1&sender_device=pc" target="_blank" title="TikTok">
+            <a href="https://www.tiktok.com/@djsambat?is_from_webapp=1&sender_device=pc" target="_blank" title="TikTok" style={{ color: 'inherit' }}>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg>
-            </a>
-            <a href="#" target="_blank" title="X (Twitter)">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4l11.733 16h4.267l-11.733 -16zM4 20l6.768 -6.768M13.232 10.768l6.768 -6.768"></path></svg>
             </a>
           </div>
 
@@ -114,13 +114,14 @@ export default function Navigation() {
               }}>LOGOUT</button>
           ) : (
             <Link href="/auth" onClick={() => setIsOpen(false)} className="btn-nav" style={{ 
-              background: 'var(--accent-gold)', 
+              background: 'var(--accent-blue)', 
               color: '#000', 
               padding: '0.5rem 1.2rem', 
               borderRadius: '6px',
               fontWeight: 800,
-              fontSize: '0.8rem'
-            }}>LOGIN</Link>
+              fontSize: '0.8rem',
+              boxShadow: 'var(--glow-blue)'
+            }}>BOOK NOW</Link>
           )}
         </div>
       </div>
