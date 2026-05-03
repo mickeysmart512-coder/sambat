@@ -30,137 +30,134 @@ export default function Navigation() {
   return (
     <nav style={{
       position: 'fixed',
-      top: '1.5rem',
+      top: '2rem',
       left: '50%',
       transform: 'translateX(-50%)',
-      width: '90%',
-      maxWidth: '1200px',
-      padding: '0.8rem 2rem',
+      width: '95%',
+      maxWidth: '1100px',
+      padding: '0.6rem 1rem',
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
       zIndex: 1000,
-      background: 'rgba(5, 5, 5, 0.6)',
-      backdropFilter: 'blur(15px)',
-      WebkitBackdropFilter: 'blur(15px)',
-      border: '1px solid var(--glass-border)',
-      borderRadius: '50px',
-      boxShadow: '0 10px 30px rgba(0,0,0,0.5)',
-      transition: 'all 0.3s ease'
+      background: 'rgba(10, 10, 10, 0.7)',
+      backdropFilter: 'blur(20px)',
+      WebkitBackdropFilter: 'blur(20px)',
+      border: '1px solid rgba(255, 255, 255, 0.1)',
+      borderRadius: '100px',
+      boxShadow: '0 20px 40px rgba(0,0,0,0.4)',
+      transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)'
     }}>
-      <div className="container" style={{
-        display: 'contents'
+      {/* Logo */}
+      <Link href="/" style={{
+        fontSize: '1.2rem',
+        fontWeight: 900,
+        letterSpacing: '1px',
+        color: '#fff',
+        marginLeft: '1.5rem',
+        zIndex: 1001
       }}>
-        <Link href="/" style={{
-          fontSize: '1.25rem',
-          fontWeight: 900,
-          letterSpacing: '2px',
-          color: 'var(--accent-gold)',
-          zIndex: 1001
-        }}>
-          DJ SAMBAT
-        </Link>
+        DJ <span style={{ color: 'var(--accent-gold)' }}>SAMBAT</span>
+      </Link>
 
-        {/* Mobile Toggle */}
-        <button 
-          onClick={() => setIsOpen(!isOpen)}
-          style={{
-            background: 'none',
-            border: 'none',
-            color: '#fff',
-            cursor: 'pointer',
-            zIndex: 1001,
-            padding: '0.5rem',
-          }}
-          className="hamburger-btn"
-        >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            {isOpen ? <><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></> : <><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="18" x2="21" y2="18" /></>}
-          </svg>
-        </button>
+      {/* Desktop Links */}
+      <div style={{
+        display: 'flex',
+        gap: '2.5rem',
+        alignItems: 'center',
+      }} className="nav-links-desktop">
+        <Link href="/" className="nav-link" style={{ fontSize: '0.7rem' }}>HOME</Link>
+        <Link href="/about" className="nav-link" style={{ fontSize: '0.7rem' }}>BIO</Link>
+        <Link href="/experiences" className="nav-link" style={{ fontSize: '0.7rem' }}>GALLERY</Link>
+        <Link href="/tour" className="nav-link" style={{ fontSize: '0.7rem' }}>TOUR</Link>
         
-        <div style={{
-          display: 'flex',
-          gap: '2rem',
-          alignItems: 'center',
-          transition: 'transform 0.3s ease',
-        }} className={`nav-links ${isOpen ? 'active' : ''}`}>
-          <Link href="/" onClick={() => setIsOpen(false)} className="nav-link" style={{ fontSize: '0.75rem' }}>HOME</Link>
-          <Link href="/about" onClick={() => setIsOpen(false)} className="nav-link" style={{ fontSize: '0.75rem' }}>BIO</Link>
-          <Link href="/experiences" onClick={() => setIsOpen(false)} className="nav-link" style={{ fontSize: '0.75rem' }}>GALLERY</Link>
-          <Link href="/tour" onClick={() => setIsOpen(false)} className="nav-link" style={{ fontSize: '0.75rem' }}>TOUR</Link>
-          
-          <div style={{ 
-            display: 'flex', 
-            gap: '1.2rem', 
-            alignItems: 'center', 
-            borderLeft: '1px solid var(--glass-border)', 
-            paddingLeft: '1.5rem' 
-          }} className="nav-socials">
-            <a href="https://www.instagram.com/dj.sambat?igsh=MWhnNWRneWZzdDhpOA==" target="_blank" title="Instagram" style={{ color: 'inherit' }} className="nav-link">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-            </a>
-            <a href="https://www.tiktok.com/@djsambat?is_from_webapp=1&sender_device=pc" target="_blank" title="TikTok" style={{ color: 'inherit' }} className="nav-link">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg>
-            </a>
-          </div>
-
-          {user ? (
-            <button 
-              onClick={() => { handleLogout(); setIsOpen(false); }}
-              className="btn-nav"
-              style={{ 
-                background: 'rgba(255,255,255,0.05)', 
-                color: '#fff', 
-                padding: '0.5rem 1.2rem', 
-                borderRadius: '6px',
-                border: '1px solid var(--glass-border)',
-                fontWeight: 800,
-                fontSize: '0.8rem',
-                cursor: 'pointer'
-              }}>LOGOUT</button>
-          ) : (
-            <Link href="/auth" onClick={() => setIsOpen(false)} className="btn-neon-blue" style={{ 
-              padding: '0.6rem 1.2rem', 
-              fontSize: '0.75rem',
-              borderRadius: '50px'
-            }}>BOOK NOW</Link>
-          )}
+        <div style={{ 
+          display: 'flex', 
+          gap: '1.2rem', 
+          alignItems: 'center', 
+          borderLeft: '1px solid rgba(255,255,255,0.1)', 
+          paddingLeft: '1.5rem',
+          marginRight: '0.5rem'
+        }}>
+          <a href="https://instagram.com/dj.sambat" target="_blank" className="nav-link" style={{ opacity: 0.8 }}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+          </a>
+          <a href="https://tiktok.com/@djsambat" target="_blank" className="nav-link" style={{ opacity: 0.8 }}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg>
+          </a>
         </div>
+
+        {user ? (
+          <button 
+            onClick={handleLogout}
+            className="btn-secondary"
+            style={{ 
+              padding: '0.6rem 1.5rem', 
+              borderRadius: '50px',
+              fontSize: '0.7rem',
+              fontWeight: 800,
+              border: '1px solid rgba(255,255,255,0.1)'
+            }}>LOGOUT</button>
+        ) : (
+          <Link href="/auth" className="btn-neon-blue" style={{ 
+            padding: '0.7rem 1.8rem', 
+            fontSize: '0.75rem',
+            borderRadius: '50px',
+            boxShadow: '0 0 20px rgba(0, 242, 255, 0.3)'
+          }}>BOOK NOW</Link>
+        )}
       </div>
 
+      {/* Mobile Toggle */}
+      <button 
+        onClick={() => setIsOpen(!isOpen)}
+        style={{
+          background: 'none',
+          border: 'none',
+          color: '#fff',
+          cursor: 'pointer',
+          display: 'none',
+          marginRight: '1rem'
+        }}
+        className="hamburger-btn"
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          {isOpen ? <path d="M18 6L6 18M6 6l12 12" /> : <path d="M3 12h18M3 6h18M3 18h18" />}
+        </svg>
+      </button>
+
+      {/* Mobile Menu */}
+      {isOpen && (
+        <div style={{
+          position: 'fixed',
+          top: '5rem',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          width: '90%',
+          background: 'rgba(10,10,10,0.95)',
+          backdropFilter: 'blur(20px)',
+          borderRadius: '24px',
+          padding: '2rem',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '1.5rem',
+          border: '1px solid rgba(255,255,255,0.1)',
+          zIndex: 999
+        }}>
+          <Link href="/" onClick={() => setIsOpen(false)} className="nav-link">HOME</Link>
+          <Link href="/about" onClick={() => setIsOpen(false)} className="nav-link">BIO</Link>
+          <Link href="/experiences" onClick={() => setIsOpen(false)} className="nav-link">GALLERY</Link>
+          <Link href="/tour" onClick={() => setIsOpen(false)} className="nav-link">TOUR</Link>
+          <Link href="/auth" onClick={() => setIsOpen(false)} className="btn-neon-blue" style={{ textAlign: 'center' }}>BOOK NOW</Link>
+        </div>
+      )}
+
       <style jsx>{`
-        .hamburger-btn { display: none; }
         @media (max-width: 991px) {
+          .nav-links-desktop { display: none; }
           .hamburger-btn { display: block; }
-          .nav-links {
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: 80%;
-            height: 100vh;
-            background: #000;
-            flex-direction: column;
-            justify-content: center;
-            transform: translateX(100%);
-            z-index: 1000;
-            padding: 2rem;
-          }
-          .nav-links.active {
-            transform: translateX(0);
-          }
-          .nav-socials {
-            border-left: none !important;
-            padding-left: 0 !important;
-            margin: 1rem 0;
-          }
-          .btn-nav {
-            width: 100%;
-            text-align: center;
-          }
         }
       `}</style>
-
     </nav>
   );
 }
