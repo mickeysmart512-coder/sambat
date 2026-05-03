@@ -65,38 +65,39 @@ export default function Hero() {
         textAlign: 'center'
       }}>
         <h2 style={{
-          fontSize: '1.2rem',
+          fontSize: 'clamp(0.8rem, 3vw, 1.2rem)',
           color: 'var(--accent-blue)',
           fontWeight: 700,
-          letterSpacing: '5px',
+          letterSpacing: 'clamp(2px, 5vw, 5px)',
           marginBottom: '1rem',
           textTransform: 'uppercase'
         }}>The State's Finest</h2>
         
-        <h1 className="section-title" style={{ fontSize: 'clamp(3rem, 15vw, 6rem)', lineHeight: '0.9' }}>
+        <h1 className="section-title" style={{ fontSize: 'clamp(2.5rem, 15vw, 6rem)', lineHeight: '0.9' }}>
           DJ <span className="text-gradient">SAMBAT</span>
         </h1>
         
         <p style={{
-          fontSize: 'clamp(1rem, 4vw, 1.5rem)',
+          fontSize: 'clamp(0.9rem, 4vw, 1.25rem)',
           maxWidth: '600px',
           margin: '1.5rem auto',
           color: '#ccc',
-          fontWeight: 400
+          fontWeight: 400,
+          padding: '0 1rem'
         }}>
           Hypeman • Party Viber • Vibe Controller. <br/>
           Bringing the heat to every stage, every club, every moment.
         </p>
         
-        <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', padding: '0 1rem' }}>
           <button 
             className="btn-primary" 
-            style={{ padding: '0.8rem 1.5rem', fontSize: '0.8rem' }}
+            style={{ padding: '0.8rem 1.5rem', fontSize: '0.8rem', width: 'clamp(200px, 100%, 250px)' }}
             onClick={handleBookClick}
           >
             Book The Experience
           </button>
-          <button className="btn-secondary" style={{ padding: '0.8rem 1.5rem', fontSize: '0.8rem' }}>Watch Live</button>
+          <button className="btn-secondary" style={{ padding: '0.8rem 1.5rem', fontSize: '0.8rem', width: 'clamp(200px, 100%, 250px)' }}>Watch Live</button>
         </div>
       </div>
 
