@@ -3,15 +3,15 @@ import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <footer style={{ 
-      padding: '6rem 0 3rem', 
-      background: '#050505', 
-      borderTop: '1px solid var(--glass-border)' 
+    <footer style={{
+      padding: '6rem 0 3rem',
+      background: '#050505',
+      borderTop: '1px solid var(--glass-border)'
     }}>
       <div className="container">
-        <div style={{ 
-          display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', 
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
           gap: '4rem',
           marginBottom: '4rem'
         }}>
@@ -47,9 +47,9 @@ export default function Footer() {
           </div>
         </div>
 
-        <div style={{ 
-          borderTop: '1px solid var(--glass-border)', 
-          paddingTop: '2rem', 
+        <div style={{
+          borderTop: '1px solid var(--glass-border)',
+          paddingTop: '2rem',
           textAlign: 'center',
           display: 'flex',
           justifyContent: 'space-between',
@@ -61,7 +61,7 @@ export default function Footer() {
             © 2026 DJ SAMBAT ENTERTAINMENT. ALL RIGHTS RESERVED.
           </p>
           <p style={{ color: '#444', fontSize: '0.75rem' }}>
-            DESIGN BY ANTIGRAVITY AI
+            DESIGN BY TECHFROST
           </p>
         </div>
       </div>
