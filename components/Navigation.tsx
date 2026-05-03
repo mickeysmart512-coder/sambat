@@ -57,15 +57,14 @@ export default function Navigation() {
         <button 
           onClick={() => setIsOpen(!isOpen)}
           style={{
-            display: 'block',
             background: 'none',
             border: 'none',
             color: '#fff',
             cursor: 'pointer',
             zIndex: 1001,
-            padding: '0.5rem'
+            padding: '0.5rem',
           }}
-          className="mobile-only"
+          className="hamburger-btn"
         >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             {isOpen ? <><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></> : <><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="18" x2="21" y2="18" /></>}
@@ -88,8 +87,11 @@ export default function Navigation() {
             borderLeft: '1px solid var(--glass-border)', 
             paddingLeft: '1.5rem' 
           }} className="nav-socials">
-            <a href="#" target="_blank" title="Instagram">
+            <a href="https://www.instagram.com/dj.sambat?igsh=MWhnNWRneWZzdDhpOA==" target="_blank" title="Instagram">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            </a>
+            <a href="https://www.tiktok.com/@djsambat?is_from_webapp=1&sender_device=pc" target="_blank" title="TikTok">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg>
             </a>
             <a href="#" target="_blank" title="X (Twitter)">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4l11.733 16h4.267l-11.733 -16zM4 20l6.768 -6.768M13.232 10.768l6.768 -6.768"></path></svg>
@@ -124,9 +126,9 @@ export default function Navigation() {
       </div>
 
       <style jsx>{`
-        .mobile-only { display: none; }
+        .hamburger-btn { display: none; }
         @media (max-width: 991px) {
-          .mobile-only { display: block; }
+          .hamburger-btn { display: block; }
           .nav-links {
             position: fixed;
             top: 0;
@@ -154,6 +156,7 @@ export default function Navigation() {
           }
         }
       `}</style>
+
     </nav>
   );
 }
