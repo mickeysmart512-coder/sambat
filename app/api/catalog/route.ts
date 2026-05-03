@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
-import { getServerSupabaseClient } from '@/lib/supabase/server';
+import prisma from '@/lib/prisma';
+import { createServerSupabaseClient } from '@/lib/supabase/server';
 
 // Get all visible catalog items
 export async function GET() {
@@ -18,7 +18,7 @@ export async function GET() {
 // Add new catalog item (Admin only)
 export async function POST(request: Request) {
   try {
-    const supabase = await getServerSupabaseClient();
+    const supabase = await createServerSupabaseClient();
     const { data: { user } } = await supabase.auth.getUser();
 
     if (!user) {
