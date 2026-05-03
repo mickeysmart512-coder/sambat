@@ -30,18 +30,26 @@ export default function Navigation() {
   return (
     <nav style={{
       position: 'fixed',
-      top: 0,
-      width: '100%',
+      top: '1.5rem',
+      left: '50%',
+      transform: 'translateX(-50%)',
+      width: '90%',
+      maxWidth: '1200px',
+      padding: '0.8rem 2rem',
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
       zIndex: 1000,
-      padding: '1rem 0',
-      background: 'linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 100%)',
+      background: 'rgba(5, 5, 5, 0.6)',
       backdropFilter: 'blur(15px)',
-      borderBottom: '1px solid var(--glass-border)'
+      WebkitBackdropFilter: 'blur(15px)',
+      border: '1px solid var(--glass-border)',
+      borderRadius: '50px',
+      boxShadow: '0 10px 30px rgba(0,0,0,0.5)',
+      transition: 'all 0.3s ease'
     }}>
       <div className="container" style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center'
+        display: 'contents'
       }}>
         <Link href="/" style={{
           fontSize: '1.25rem',
@@ -77,11 +85,11 @@ export default function Navigation() {
           alignItems: 'center',
           transition: 'transform 0.3s ease',
         }} className={`nav-links ${isOpen ? 'active' : ''}`}>
-          <Link href="/" onClick={() => setIsOpen(false)} style={{ fontWeight: 600, fontSize: '0.8rem' }}>HOME</Link>
-          <Link href="/about" onClick={() => setIsOpen(false)} style={{ fontWeight: 600, fontSize: '0.8rem' }}>BIO</Link>
-          <Link href="/experiences" onClick={() => setIsOpen(false)} style={{ fontWeight: 600, fontSize: '0.8rem' }}>GALLERY</Link>
-          <Link href="/music" onClick={() => setIsOpen(false)} style={{ fontWeight: 600, fontSize: '0.8rem' }}>MUSIC</Link>
-          <Link href="/tour" onClick={() => setIsOpen(false)} style={{ fontWeight: 600, fontSize: '0.8rem' }}>TOUR</Link>
+          <Link href="/" onClick={() => setIsOpen(false)} className="nav-link" style={{ fontSize: '0.75rem' }}>HOME</Link>
+          <Link href="/about" onClick={() => setIsOpen(false)} className="nav-link" style={{ fontSize: '0.75rem' }}>BIO</Link>
+          <Link href="/experiences" onClick={() => setIsOpen(false)} className="nav-link" style={{ fontSize: '0.75rem' }}>GALLERY</Link>
+          <Link href="/music" onClick={() => setIsOpen(false)} className="nav-link" style={{ fontSize: '0.75rem' }}>MUSIC</Link>
+          <Link href="/tour" onClick={() => setIsOpen(false)} className="nav-link" style={{ fontSize: '0.75rem' }}>TOUR</Link>
           
           <div style={{ 
             display: 'flex', 
@@ -90,10 +98,10 @@ export default function Navigation() {
             borderLeft: '1px solid var(--glass-border)', 
             paddingLeft: '1.5rem' 
           }} className="nav-socials">
-            <a href="https://www.instagram.com/dj.sambat?igsh=MWhnNWRneWZzdDhpOA==" target="_blank" title="Instagram" style={{ color: 'inherit' }}>
+            <a href="https://www.instagram.com/dj.sambat?igsh=MWhnNWRneWZzdDhpOA==" target="_blank" title="Instagram" style={{ color: 'inherit' }} className="nav-link">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
             </a>
-            <a href="https://www.tiktok.com/@djsambat?is_from_webapp=1&sender_device=pc" target="_blank" title="TikTok" style={{ color: 'inherit' }}>
+            <a href="https://www.tiktok.com/@djsambat?is_from_webapp=1&sender_device=pc" target="_blank" title="TikTok" style={{ color: 'inherit' }} className="nav-link">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg>
             </a>
           </div>
@@ -113,14 +121,10 @@ export default function Navigation() {
                 cursor: 'pointer'
               }}>LOGOUT</button>
           ) : (
-            <Link href="/auth" onClick={() => setIsOpen(false)} className="btn-nav" style={{ 
-              background: 'var(--accent-blue)', 
-              color: '#000', 
-              padding: '0.5rem 1.2rem', 
-              borderRadius: '6px',
-              fontWeight: 800,
-              fontSize: '0.8rem',
-              boxShadow: 'var(--glow-blue)'
+            <Link href="/auth" onClick={() => setIsOpen(false)} className="btn-neon-blue" style={{ 
+              padding: '0.6rem 1.2rem', 
+              fontSize: '0.75rem',
+              borderRadius: '50px'
             }}>BOOK NOW</Link>
           )}
         </div>

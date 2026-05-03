@@ -4,6 +4,7 @@ import Hero from '@/components/Hero';
 import Gallery from '@/components/Gallery';
 import Services from '@/components/Services';
 import MusicPlayer from '@/components/MusicPlayer';
+import TourDates from '@/components/TourDates';
 import Footer from '@/components/Footer';
 
 export default function Home() {
@@ -14,6 +15,7 @@ export default function Home() {
       <Services />
       <Gallery />
       <MusicPlayer />
+      <TourDates />
       
       {/* Booking CTA Section */}
       <section className="section-padding" style={{ background: '#080808' }}>

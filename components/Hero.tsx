@@ -3,7 +3,10 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { createClient } from '@/lib/supabase/client';
 
+import AuthModal from './AuthModal';
+
 export default function Hero() {
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [user, setUser] = useState<any>(null);
   const supabase = createClient();
 
@@ -15,6 +18,15 @@ export default function Hero() {
     checkUser();
   }, []);
 
+  const handleBookClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (user) {
+      window.location.href = '/booking';
+    } else {
+      setIsAuthModalOpen(true);
+    }
+  };
+
   return (
     <section style={{ 
       position: 'relative', 
@@ -24,6 +36,8 @@ export default function Hero() {
       overflow: 'hidden',
       background: '#000'
     }}>
+      <AuthModal isOpen={isAuthModalOpen} onClose={() => setIsAuthModalOpen(false)} />
+      
       {/* Cinematic Background Overlay */}
       <div style={{
         position: 'absolute',
@@ -62,7 +76,7 @@ export default function Hero() {
           </p>
           
           <div className="fade-in" style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
-            <Link href={user ? "/booking" : "/auth"} className="btn-neon-blue">BOOK THE EXPERIENCE</Link>
+            <a href="#" onClick={handleBookClick} className="btn-neon-blue" style={{ textDecoration: 'none' }}>BOOK THE EXPERIENCE</a>
             <Link href="/experiences" className="btn-neon-outline">WATCH LIVE</Link>
           </div>
         </div>

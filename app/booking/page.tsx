@@ -184,36 +184,36 @@ export default function BookingPage() {
             </div>
           </div>
 
-          <div className="glass-card" style={{ maxWidth: '800px', margin: '0 auto', position: 'relative' }}>
+          <div className="glass-card" style={{ maxWidth: '800px', margin: '0 auto', position: 'relative', padding: '3rem' }}>
             {step === 1 ? (
-              <form onSubmit={handleNextStep} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
+              <form onSubmit={handleNextStep} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem' }}>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                  <label style={{ fontWeight: 600, fontSize: '0.8rem', color: 'var(--accent-gold)' }}>FIRST NAME</label>
-                  <input type="text" name="firstName" required value={formData.firstName} onChange={handleInputChange} placeholder="John" style={inputStyle} />
+                  <label style={{ fontWeight: 800, fontSize: '0.7rem', color: 'var(--accent-blue)', letterSpacing: '0.1em' }}>FIRST NAME</label>
+                  <input type="text" name="firstName" required value={formData.firstName} onChange={handleInputChange} placeholder="John" />
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                  <label style={{ fontWeight: 600, fontSize: '0.8rem', color: 'var(--accent-gold)' }}>LAST NAME</label>
-                  <input type="text" name="lastName" required value={formData.lastName} onChange={handleInputChange} placeholder="Doe" style={inputStyle} />
+                  <label style={{ fontWeight: 800, fontSize: '0.7rem', color: 'var(--accent-blue)', letterSpacing: '0.1em' }}>LAST NAME</label>
+                  <input type="text" name="lastName" required value={formData.lastName} onChange={handleInputChange} placeholder="Doe" />
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                  <label style={{ fontWeight: 600, fontSize: '0.8rem', color: 'var(--accent-gold)' }}>PHONE NUMBER</label>
-                  <input type="tel" name="phone" required value={formData.phone} onChange={handleInputChange} placeholder="+234..." style={inputStyle} />
+                  <label style={{ fontWeight: 800, fontSize: '0.7rem', color: 'var(--accent-blue)', letterSpacing: '0.1em' }}>PHONE NUMBER</label>
+                  <input type="tel" name="phone" required value={formData.phone} onChange={handleInputChange} placeholder="+234..." />
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                  <label style={{ fontWeight: 600, fontSize: '0.8rem', color: 'var(--accent-gold)' }}>EMAIL</label>
-                  <input type="email" name="email" required value={formData.email} onChange={handleInputChange} placeholder="john@example.com" style={inputStyle} />
+                  <label style={{ fontWeight: 800, fontSize: '0.7rem', color: 'var(--accent-blue)', letterSpacing: '0.1em' }}>EMAIL</label>
+                  <input type="email" name="email" required value={formData.email} onChange={handleInputChange} placeholder="john@example.com" />
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                  <label style={{ fontWeight: 600, fontSize: '0.8rem', color: 'var(--accent-gold)' }}>EVENT DATE</label>
-                  <input type="date" name="eventDate" required value={formData.eventDate} onChange={handleInputChange} style={inputStyle} />
+                  <label style={{ fontWeight: 800, fontSize: '0.7rem', color: 'var(--accent-blue)', letterSpacing: '0.1em' }}>EVENT DATE</label>
+                  <input type="date" name="eventDate" required value={formData.eventDate} onChange={handleInputChange} />
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                  <label style={{ fontWeight: 600, fontSize: '0.8rem', color: 'var(--accent-gold)' }}>EVENT TIME</label>
-                  <input type="time" name="eventTime" required value={formData.eventTime} onChange={handleInputChange} style={inputStyle} />
+                  <label style={{ fontWeight: 800, fontSize: '0.7rem', color: 'var(--accent-blue)', letterSpacing: '0.1em' }}>EVENT TIME</label>
+                  <input type="time" name="eventTime" required value={formData.eventTime} onChange={handleInputChange} />
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                  <label style={{ fontWeight: 600, fontSize: '0.8rem', color: 'var(--accent-gold)' }}>EVENT TYPE</label>
-                  <select name="eventType" required value={formData.eventType} onChange={handleInputChange} style={inputStyle}>
+                  <label style={{ fontWeight: 800, fontSize: '0.7rem', color: 'var(--accent-blue)', letterSpacing: '0.1em' }}>EVENT TYPE</label>
+                  <select name="eventType" required value={formData.eventType} onChange={handleInputChange}>
                     <option value="">Select Event Type</option>
                     <option value="wedding">Wedding</option>
                     <option value="club">Club Performance</option>
@@ -222,25 +222,16 @@ export default function BookingPage() {
                   </select>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                  <label style={{ fontWeight: 600, fontSize: '0.8rem', color: 'var(--accent-gold)' }}>SELECT STATE</label>
-                  <select name="state" required value={formData.state} onChange={handleInputChange} style={inputStyle}>
+                  <label style={{ fontWeight: 800, fontSize: '0.7rem', color: 'var(--accent-blue)', letterSpacing: '0.1em' }}>SELECT STATE</label>
+                  <select name="state" required value={formData.state} onChange={handleInputChange}>
                     <option value="">Select State</option>
                     {NIGERIAN_STATES.map(s => <option key={s} value={s}>{s}</option>)}
                   </select>
                 </div>
                 <div style={{ gridColumn: '1 / -1', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                  <label style={{ fontWeight: 600, fontSize: '0.8rem', color: 'var(--accent-gold)' }}>VENUE / LOCATION</label>
+                  <label style={{ fontWeight: 800, fontSize: '0.7rem', color: 'var(--accent-blue)', letterSpacing: '0.1em' }}>VENUE / LOCATION</label>
                   <div style={{ position: 'relative' }}>
-                    <input type="text" name="location" required value={formData.location} onChange={handleInputChange} placeholder="Search for venue..." style={inputStyle} />
-                    <div style={{ position: 'absolute', top: '100%', left: '0', right: '0', background: 'var(--surface)', border: '1px solid var(--glass-border)', borderRadius: '0 0 8px 8px', zIndex: 10, display: formData.location.length > 2 ? 'block' : 'none' }}>
-                       {/* Mock Google Maps Dropdown */}
-                       <div style={{ padding: '1rem', cursor: 'pointer', borderBottom: '1px solid rgba(255,255,255,0.05)' }} onClick={() => setFormData({...formData, location: `${formData.location} Event Center, Lagos`})}>
-                         📍 {formData.location} Event Center, Lagos
-                       </div>
-                       <div style={{ padding: '1rem', cursor: 'pointer' }} onClick={() => setFormData({...formData, location: `${formData.location} Plaza, VI`})}>
-                         📍 {formData.location} Plaza, Victoria Island
-                       </div>
-                    </div>
+                    <input type="text" name="location" required value={formData.location} onChange={handleInputChange} placeholder="Search for venue..." style={{ width: '100%' }} />
                   </div>
                 </div>
 
@@ -251,62 +242,64 @@ export default function BookingPage() {
             ) : (
               <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
                 <div style={{ textAlign: 'center' }}>
-                  <h3 style={{ color: 'var(--accent-gold)', marginBottom: '1rem' }}>BOOKING SUMMARY</h3>
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', textAlign: 'left', background: 'rgba(255,255,255,0.03)', padding: '1.5rem', borderRadius: '12px' }}>
-                    <div><span style={{ color: '#666', fontSize: '0.8rem' }}>NAME:</span> <br/> {formData.firstName} {formData.lastName}</div>
-                    <div><span style={{ color: '#666', fontSize: '0.8rem' }}>DATE/TIME:</span> <br/> {formData.eventDate} @ {formData.eventTime}</div>
-                    <div><span style={{ color: '#666', fontSize: '0.8rem' }}>TYPE:</span> <br/> {formData.eventType.toUpperCase()}</div>
-                    <div><span style={{ color: '#666', fontSize: '0.8rem' }}>LOCATION:</span> <br/> {formData.state}, {formData.location}</div>
+                  <h3 style={{ color: 'var(--accent-gold)', marginBottom: '1.5rem', fontWeight: 900 }}>BOOKING SUMMARY</h3>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', textAlign: 'left', background: 'rgba(255,255,255,0.02)', padding: '2rem', borderRadius: '16px', border: '1px solid var(--glass-border)' }}>
+                    <div><span style={{ color: '#666', fontSize: '0.7rem', fontWeight: 800 }}>NAME</span> <br/> {formData.firstName} {formData.lastName}</div>
+                    <div><span style={{ color: '#666', fontSize: '0.7rem', fontWeight: 800 }}>DATE/TIME</span> <br/> {formData.eventDate} @ {formData.eventTime}</div>
+                    <div><span style={{ color: '#666', fontSize: '0.7rem', fontWeight: 800 }}>TYPE</span> <br/> {formData.eventType.toUpperCase()}</div>
+                    <div><span style={{ color: '#666', fontSize: '0.7rem', fontWeight: 800 }}>LOCATION</span> <br/> {formData.state}, {formData.location}</div>
                   </div>
                 </div>
 
                 <div style={{ 
-                  padding: '2rem', 
-                  background: 'rgba(212, 175, 55, 0.1)', 
-                  borderRadius: '12px',
-                  border: '1px solid var(--accent-gold)',
+                  padding: '2.5rem', 
+                  background: 'rgba(0, 242, 255, 0.05)', 
+                  borderRadius: '16px',
+                  border: '1px solid var(--accent-blue)',
                   display: 'flex',
                   justifyContent: 'space-between',
-                  alignItems: 'center'
+                  alignItems: 'center',
+                  boxShadow: 'var(--glow-blue)'
                 }}>
                   <div>
-                    <h4 style={{ color: 'var(--accent-gold)', fontSize: '1rem', fontWeight: 900 }}>TOTAL QUOTE</h4>
-                    <p style={{ fontSize: '0.8rem', color: '#888' }}>Includes base price and travel fees.</p>
+                    <h4 style={{ color: 'var(--accent-blue)', fontSize: '0.8rem', fontWeight: 900, letterSpacing: '0.1em' }}>TOTAL QUOTE</h4>
+                    <p style={{ fontSize: '0.75rem', color: '#888' }}>Includes base price and travel fees.</p>
                   </div>
-                  <div style={{ fontSize: '2.5rem', fontWeight: 900, color: 'var(--accent-gold)' }}>
+                  <div style={{ fontSize: '2.5rem', fontWeight: 900, color: '#fff' }}>
                     ₦{estimatedPrice.toLocaleString()}
                   </div>
                 </div>
 
                 <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-                  <button type="button" onClick={handleNegotiate} className="btn-secondary" style={{ flex: 1, border: '1px solid var(--accent-gold)', color: 'var(--accent-gold)', padding: '1rem' }}>
+                  <button type="button" onClick={handleNegotiate} className="btn-secondary" style={{ flex: 1 }}>
                     NEGOTIATE PRICE
                   </button>
-                  <div style={{ flex: 1, display: 'flex', gap: '0.5rem' }}>
+                  <div style={{ flex: 1.5, display: 'flex', gap: '0.5rem' }}>
                     <input 
                       type="text" 
                       name="negotiationCode" 
-                      placeholder="Code (Optional)" 
+                      placeholder="Enter Code" 
                       value={formData.negotiationCode}
                       onChange={handleInputChange}
-                      style={{ ...inputStyle, flex: 1 }} 
+                      style={{ flex: 1 }} 
                     />
-                    <button type="button" onClick={verifyCode} disabled={isVerifyingCode} style={{ padding: '0.8rem 1.5rem', background: 'var(--accent-gold)', border: 'none', borderRadius: '8px', fontWeight: 700, cursor: 'pointer', opacity: isVerifyingCode ? 0.5 : 1 }}>
+                    <button type="button" onClick={verifyCode} disabled={isVerifyingCode} className="btn-primary" style={{ padding: '0 1.5rem' }}>
                       APPLY
                     </button>
                   </div>
                 </div>
 
-                <button type="submit" className="btn-primary" style={{ width: '100%', padding: '1.5rem', fontSize: '1.2rem' }}>
+                <button type="submit" className="btn-neon-blue" style={{ width: '100%', padding: '1.5rem', fontSize: '1.2rem' }}>
                   PAY & CONFIRM BOOKING
                 </button>
                 
-                <button type="button" onClick={() => setStep(1)} style={{ background: 'none', border: 'none', color: '#666', cursor: 'pointer', fontSize: '0.9rem' }}>
-                  Go back to edit details
+                <button type="button" onClick={() => setStep(1)} style={{ background: 'none', border: 'none', color: '#666', cursor: 'pointer', fontSize: '0.8rem', fontWeight: 600 }}>
+                  ← EDIT BOOKING DETAILS
                 </button>
               </form>
             )}
           </div>
+ </div>
         </div>
       </section>
 

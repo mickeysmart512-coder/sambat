@@ -37,6 +37,37 @@ html, body {
   scroll-behavior: smooth;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+}
+
+.nav-link {
+  position: relative;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent-blue);
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover {
+  color: var(--accent-blue);
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
 h1, h2, h3, h4 {
   font-family: 'Montserrat', sans-serif;
   text-transform: uppercase;
@@ -98,6 +129,58 @@ h1, h2, h3, h4 {
   border-color: var(--accent-gold);
   color: var(--accent-gold);
   box-shadow: var(--glow-gold);
+}
+
+/* Legacy Support & General Buttons */
+.btn-primary {
+  background: var(--accent-gold);
+  color: #000;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-weight: 800;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  box-shadow: var(--glow-gold);
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-weight: 800;
+  text-transform: uppercase;
+  border: 1px solid var(--glass-border);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #fff;
+}
+
+input, select, textarea {
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: 8px;
+  color: #fff !important;
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.3s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--accent-blue) !important;
+  box-shadow: 0 0 10px rgba(0, 242, 255, 0.2);
 }
 
 /* Animations */
