@@ -27,7 +27,16 @@ export default function AuthPage() {
           password,
         });
         if (error) throw error;
-        window.location.href = '/dashboard';
+        
+        // Check if admin and redirect accordingly
+        const checkRes = await fetch('/api/auth/check-admin');
+        const checkData = await checkRes.json();
+        
+        if (checkData.isAdmin) {
+          window.location.href = '/studio-sambat-hq';
+        } else {
+          window.location.href = '/dashboard';
+        }
       } else {
         const { error } = await supabase.auth.signUp({
           email,
