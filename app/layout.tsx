@@ -11,6 +11,8 @@ export const metadata: Metadata = {
   keywords: ["DJ Sambat", "Hypeman", "Party Viber", "Event DJ", "Booking DJ"],
 };
 
+import Preloader from "@/components/Preloader";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -19,6 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${montserrat.variable}`}>
+        <Preloader />
         {children}
       </body>
     </html>
