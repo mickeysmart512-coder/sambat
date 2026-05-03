@@ -80,7 +80,6 @@ export default function Navigation() {
         }} className={`nav-links ${isOpen ? 'active' : ''}`}>
           <Link href="/about" onClick={() => setIsOpen(false)} style={{ fontWeight: 600, fontSize: '0.85rem' }}>ABOUT</Link>
           <Link href="/tour" onClick={() => setIsOpen(false)} style={{ fontWeight: 600, fontSize: '0.85rem' }}>TOUR</Link>
-          {user && <Link href="/dashboard" onClick={() => setIsOpen(false)} style={{ fontWeight: 600, fontSize: '0.85rem' }}>DASHBOARD</Link>}
           
           <div style={{ 
             display: 'flex', 

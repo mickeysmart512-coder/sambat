@@ -75,3 +75,13 @@ model Setting {
   value String
 }
 
+model Catalog {
+  id        String   @id @default(cuid())
+  url       String   @unique
+  platform  String?  // instagram, tiktok, etc.
+  isVisible Boolean  @default(true)
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
