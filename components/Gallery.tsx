@@ -12,13 +12,8 @@ export default function Gallery() {
   ];
 
   return (
-    <section id="gallery" style={{ padding: 'clamp(4rem, 10vw, 8rem) 0', background: '#050505' }}>
+    <section id="gallery" style={{ padding: 'clamp(2rem, 5vw, 4rem) 0', background: '#050505' }}>
       <div className="container">
-        <h2 className="section-title">The <span className="text-gradient">Experience</span></h2>
-        <p style={{ color: '#888', marginBottom: 'clamp(2rem, 5vw, 4rem)', fontSize: 'clamp(1rem, 3vw, 1.2rem)' }}>
-          Real vibes from DJ Sambat's catalog.
-        </p>
-        
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fill, minmax(clamp(280px, 100%, 350px), 1fr))',

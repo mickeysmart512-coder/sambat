@@ -27,15 +27,22 @@ export default function SocialEmbed({ url }: SocialEmbedProps) {
   if (url.includes('instagram.com')) {
     const reelId = url.split('/')[4];
     return (
-      <div className="glass-card" style={{ padding: '0', overflow: 'hidden', height: '100%', background: '#000' }}>
+      <div className="glass-card" style={{ padding: '0', overflow: 'hidden', height: '100%', background: '#000', position: 'relative' }}>
         <iframe
-          src={`https://www.instagram.com/p/${reelId}/embed`}
+          src={`https://www.instagram.com/p/${reelId}/embed?captioned=0`}
           width="100%"
-          height="100%"
+          height="120%"
           frameBorder="0"
           scrolling="no"
           allowTransparency={true}
-          style={{ border: 'none', minHeight: '400px' }}
+          style={{ 
+            border: 'none', 
+            minHeight: '500px',
+            marginTop: '-54px',
+            position: 'absolute',
+            top: 0,
+            left: 0
+          }}
         ></iframe>
       </div>
     );
