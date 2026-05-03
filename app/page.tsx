@@ -3,7 +3,6 @@ import Navigation from '@/components/Navigation';
 import Hero from '@/components/Hero';
 import Gallery from '@/components/Gallery';
 import Services from '@/components/Services';
-import MusicPlayer from '@/components/MusicPlayer';
 import TourDates from '@/components/TourDates';
 import Footer from '@/components/Footer';
 
@@ -14,7 +13,6 @@ export default function Home() {
       <Hero />
       <Services />
       <Gallery />
-      <MusicPlayer />
       <TourDates />
       
       {/* Booking CTA Section */}

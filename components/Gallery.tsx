@@ -34,13 +34,13 @@ export default function Gallery() {
           {loading ? (
             // Skeleton State
             Array(6).fill(0).map((_, i) => (
-              <div key={i} style={{ height: '500px' }}>
+              <div key={i} style={{ height: '650px' }}>
                 <Skeleton height="100%" borderRadius="16px" />
               </div>
             ))
           ) : (
             media.map((item, index) => (
-              <div key={item.id || index} className="fade-in" style={{ animationDelay: `${index * 0.15}s`, height: '500px' }}>
+              <div key={item.id || index} className="fade-in" style={{ animationDelay: `${index * 0.15}s`, height: '650px' }}>
                 <SocialEmbed url={item.url} />
               </div>
             ))

@@ -88,7 +88,6 @@ export default function Navigation() {
           <Link href="/" onClick={() => setIsOpen(false)} className="nav-link" style={{ fontSize: '0.75rem' }}>HOME</Link>
           <Link href="/about" onClick={() => setIsOpen(false)} className="nav-link" style={{ fontSize: '0.75rem' }}>BIO</Link>
           <Link href="/experiences" onClick={() => setIsOpen(false)} className="nav-link" style={{ fontSize: '0.75rem' }}>GALLERY</Link>
-          <Link href="/music" onClick={() => setIsOpen(false)} className="nav-link" style={{ fontSize: '0.75rem' }}>MUSIC</Link>
           <Link href="/tour" onClick={() => setIsOpen(false)} className="nav-link" style={{ fontSize: '0.75rem' }}>TOUR</Link>
           
           <div style={{ 

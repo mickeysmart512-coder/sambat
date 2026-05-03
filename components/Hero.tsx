@@ -28,16 +28,16 @@ export default function Hero() {
   };
 
   return (
-    <section style={{ 
-      position: 'relative', 
-      minHeight: '100vh', 
-      display: 'flex', 
-      alignItems: 'center', 
+    <section style={{
+      position: 'relative',
+      minHeight: '100vh',
+      display: 'flex',
+      alignItems: 'center',
       overflow: 'hidden',
       background: '#000'
     }}>
       <AuthModal isOpen={isAuthModalOpen} onClose={() => setIsAuthModalOpen(false)} />
-      
+
       {/* Cinematic Background Overlay */}
       <div style={{
         position: 'absolute',
@@ -56,25 +56,25 @@ export default function Hero() {
           <p className="fade-in neon-text-blue" style={{ fontWeight: 800, letterSpacing: '0.3em', marginBottom: '1.5rem', fontSize: '0.9rem' }}>
             THE STATE'S FINEST
           </p>
-          <h1 className="fade-in" style={{ 
-            fontSize: 'clamp(3.5rem, 10vw, 8rem)', 
-            lineHeight: 0.9, 
+          <h1 className="fade-in" style={{
+            fontSize: 'clamp(3.5rem, 10vw, 8rem)',
+            lineHeight: 0.9,
             marginBottom: '2rem',
             fontWeight: 900
           }}>
             DJ <span className="neon-text-gold">SAMBAT</span>
           </h1>
-          <p className="fade-in" style={{ 
-            fontSize: 'clamp(1rem, 2vw, 1.5rem)', 
-            color: '#ccc', 
+          <p className="fade-in" style={{
+            fontSize: 'clamp(1rem, 2vw, 1.5rem)',
+            color: '#ccc',
             marginBottom: '3rem',
             maxWidth: '600px',
             lineHeight: 1.6
           }}>
-            Hypeman • Party Viber • Vibe Controller.<br/>
+            Hypeman • Party Viber • Vibe Controller.<br />
             <span style={{ color: '#fff', fontWeight: 600 }}>Bringing the heat to every stage, every club, every moment.</span>
           </p>
-          
+
           <div className="fade-in" style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
             <a href="#" onClick={handleBookClick} className="btn-neon-blue" style={{ textDecoration: 'none' }}>BOOK THE EXPERIENCE</a>
             <Link href="/experiences" className="btn-neon-outline">WATCH LIVE</Link>
@@ -82,10 +82,10 @@ export default function Hero() {
         </div>
 
         {/* Stats Row */}
-        <div className="fade-in" style={{ 
-          marginTop: '6rem', 
-          display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', 
+        <div className="fade-in" style={{
+          marginTop: '6rem',
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
           gap: '3rem',
           borderTop: '1px solid var(--glass-border)',
           paddingTop: '3rem'
@@ -96,7 +96,7 @@ export default function Hero() {
           </div>
           <div>
             <h3 style={{ fontSize: '2.5rem', color: 'var(--accent-gold)', marginBottom: '0.5rem' }}>15+</h3>
-            <p style={{ fontSize: '0.8rem', color: '#888', fontWeight: 600, letterSpacing: '0.1em' }}>CITIES VISITED</p>
+            <p style={{ fontSize: '0.8rem', color: '#888', fontWeight: 600, letterSpacing: '0.1em' }}>STATES VISITED</p>
           </div>
           <div>
             <h3 style={{ fontSize: '2.5rem', color: 'var(--accent-pink)', marginBottom: '0.5rem' }}>50K+</h3>

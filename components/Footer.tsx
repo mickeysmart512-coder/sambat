@@ -32,7 +32,7 @@ export default function Footer() {
               <li><Link href="/" style={{ color: '#888', textDecoration: 'none', fontSize: '0.85rem' }}>HOME</Link></li>
               <li><Link href="/about" style={{ color: '#888', textDecoration: 'none', fontSize: '0.85rem' }}>BIO</Link></li>
               <li><Link href="/experiences" style={{ color: '#888', textDecoration: 'none', fontSize: '0.85rem' }}>GALLERY</Link></li>
-              <li><Link href="/music" style={{ color: '#888', textDecoration: 'none', fontSize: '0.85rem' }}>MUSIC</Link></li>
+              <li><Link href="/tour" style={{ color: '#888', textDecoration: 'none', fontSize: '0.85rem' }}>TOUR</Link></li>
             </ul>
           </div>
 
