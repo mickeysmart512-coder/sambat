@@ -21,7 +21,7 @@ export async function GET() {
         create: { 
           email: user.email, 
           role: 'ADMIN',
-          fullName: user.user_metadata?.full_name || 'Admin'
+          name: user.user_metadata?.full_name || 'Admin'
         }
       });
       return NextResponse.json({ isAdmin: true });
