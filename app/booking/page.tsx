@@ -299,7 +299,6 @@ export default function BookingPage() {
               </form>
             )}
           </div>
- </div>
         </div>
       </section>
 
