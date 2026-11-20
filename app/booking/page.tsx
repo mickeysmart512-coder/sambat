@@ -1,6 +1,7 @@
 'use client';
 import Navigation from '@/components/Navigation';
 import { useState, useEffect } from 'react';
+import { createClient } from '@/lib/supabase/client';
 
 const NIGERIAN_STATES = [
   'Lagos', 'Abuja (FCT)', 'Rivers', 'Oyo', 'Kano', 'Ogun', 'Enugu', 'Edo', 'Delta', 'Anambra',
@@ -38,6 +39,21 @@ export default function BookingPage() {
 
   useEffect(() => {
     // Fetch settings and state prices
+    const supabase = createClient();
+    supabase.auth.getUser().then(({ data }) => {
+      const u = data?.user;
+      if (u) {
+        const fullName = u.user_metadata?.full_name || '';
+        const parts = fullName.split(' ');
+        setFormData(prev => ({
+          ...prev,
+          email: u.email || prev.email,
+          firstName: parts[0] || prev.firstName,
+          lastName: parts.slice(1).join(' ') || prev.lastName
+        }));
+      }
+    }).catch(() => {});
+
     Promise.all([
       fetch('/api/settings').then(res => res.json()),
       fetch('/api/state-prices').then(res => res.json())
@@ -99,7 +115,8 @@ export default function BookingPage() {
     setNegotiationTimer(900); // 15 minutes
     // Open WhatsApp in new tab
     const message = `Hi Sambat, I'm booking an experience for ${formData.eventDate} in ${formData.state} and would like to negotiate the price. My name is ${formData.firstName} ${formData.lastName}.`;
-    window.open(`https://wa.me/2348000000000?text=${encodeURIComponent(message)}`, '_blank');
+    const waNum = (settings?.whatsapp_number || '2348000000000').replace(/[^0-9]/g, '');
+    window.open(`https://wa.me/${waNum}?text=${encodeURIComponent(message)}`, '_blank');
   };
 
   const verifyCode = async () => {

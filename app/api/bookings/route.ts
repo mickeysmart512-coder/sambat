@@ -1,9 +1,14 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
+    const { searchParams } = new URL(request.url);
+    const email = searchParams.get('email');
+
+    const where = email ? { email: { equals: email } } : {};
     const bookings = await prisma.booking.findMany({
+      where,
       orderBy: { createdAt: 'desc' }
     });
     return NextResponse.json(bookings);
@@ -33,7 +38,7 @@ export async function POST(request: Request) {
         location,
         venue,
         message,
-        totalPrice: parseFloat(totalPrice),
+        totalPrice: parseFloat(totalPrice || 0),
         isNegotiated: !!isNegotiated,
         agreedPrice: agreedPrice ? parseFloat(agreedPrice) : null,
         status: 'PENDING'
@@ -42,7 +47,7 @@ export async function POST(request: Request) {
 
     // Mark negotiation code as used if provided
     if (negotiationCode) {
-      await prisma.negotiationCode.update({
+      await prisma.negotiationCode.updateMany({
         where: { code: negotiationCode },
         data: { isUsed: true }
       });
@@ -54,7 +59,6 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Failed to save booking' }, { status: 500 });
   }
 }
-
 
 export async function PATCH(request: Request) {
   try {

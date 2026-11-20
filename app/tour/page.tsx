@@ -4,13 +4,27 @@ import { useState, useEffect } from 'react';
 
 export default function TourPage() {
   const [tours, setTours] = useState<any[]>([]);
+  const [whatsappNumber, setWhatsappNumber] = useState('2348000000000');
 
   useEffect(() => {
     fetch('/api/tours')
       .then(res => res.json())
-      .then(data => setTours(data))
+      .then(data => setTours(Array.isArray(data) ? data : []))
       .catch(err => console.error(err));
+
+    fetch('/api/settings')
+      .then(res => res.json())
+      .then(data => {
+        if (data?.whatsapp_number) setWhatsappNumber(data.whatsapp_number);
+      })
+      .catch(() => {});
   }, []);
+
+  const handleTicketClick = (tour: any) => {
+    if (tour.status === 'SOLD OUT') return;
+    const msg = encodeURIComponent(`Hi Sambat, I'd like to secure VIP / tickets for your show in ${tour.city} at ${tour.venue} (${tour.date}).`);
+    window.open(`https://wa.me/${whatsappNumber.replace(/[^0-9]/g, '')}?text=${msg}`, '_blank');
+  };
 
   return (
     <main style={{ minHeight: '100vh', background: '#000' }}>
@@ -20,31 +34,44 @@ export default function TourPage() {
         <div className="container">
           <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
             <h2 className="section-title">The <span className="text-gradient">Vibe Tour</span> 2026</h2>
-            <p style={{ color: '#888', fontSize: '1.2rem' }}>Catch the energy live in a city near you.</p>
+            <p style={{ color: '#888', fontSize: '1.2rem' }}>Catch the energy live in a city near you. VIP passes & guest lists.</p>
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-            {tours.length > 0 ? tours.map((tour, index) => (
-              <div key={index} className="glass-card" style={{
-                display: 'grid',
-                gridTemplateColumns: '1fr 2fr 2fr 1fr',
-                padding: '2.5rem',
-                alignItems: 'center',
-                transition: 'var(--transition)',
-                cursor: 'pointer'
-              }}>
-                <div style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--accent-gold)' }}>{tour.date}</div>
-                <div style={{ fontSize: '1.8rem', fontWeight: 900, letterSpacing: '1px' }}>{tour.city}</div>
-                <div style={{ color: '#888', fontWeight: 500, fontSize: '1.1rem' }}>{tour.venue}</div>
-                <div style={{ textAlign: 'right' }}>
-                  <button className={tour.status === "SOLD OUT" ? "btn-secondary" : "btn-primary"} 
-                          style={{ padding: '0.8rem 2.5rem', fontSize: '0.9rem', opacity: tour.status === "SOLD OUT" ? 0.5 : 1 }}>
-                    {tour.status}
-                  </button>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
+            {tours.length > 0 ? tours.map((tour, index) => {
+              const isSoldOut = tour.status === 'SOLD OUT';
+              return (
+                <div key={index} className="glass-card" style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+                  gap: '1.5rem',
+                  padding: '2.5rem',
+                  alignItems: 'center',
+                  transition: 'var(--transition)',
+                  borderLeft: isSoldOut ? '3px solid #666' : '3px solid var(--accent-gold)'
+                }}>
+                  <div style={{ fontSize: '1.3rem', fontWeight: 900, color: 'var(--accent-gold)' }}>{tour.date}</div>
+                  <div style={{ fontSize: '1.8rem', fontWeight: 900, letterSpacing: '1px' }}>{tour.city}</div>
+                  <div style={{ color: '#aaa', fontWeight: 500, fontSize: '1.1rem' }}>{tour.venue}</div>
+                  <div style={{ textAlign: 'right' }}>
+                    <button 
+                      onClick={() => handleTicketClick(tour)}
+                      disabled={isSoldOut}
+                      className={isSoldOut ? "btn-secondary" : "btn-primary"} 
+                      style={{ 
+                        padding: '0.8rem 2.5rem', 
+                        fontSize: '0.9rem', 
+                        opacity: isSoldOut ? 0.5 : 1,
+                        cursor: isSoldOut ? 'not-allowed' : 'pointer'
+                      }}
+                    >
+                      {isSoldOut ? 'SOLD OUT' : 'GET TICKETS'}
+                    </button>
+                  </div>
                 </div>
-              </div>
-            )) : (
-              <p style={{ textAlign: 'center', color: '#444', fontSize: '1.5rem', padding: '5rem' }}>NO UPCOMING DATES ANNOUNCED YET.</p>
+              );
+            }) : (
+              <p style={{ textAlign: 'center', color: '#666', fontSize: '1.3rem', padding: '5rem' }}>NO UPCOMING DATES ANNOUNCED YET. CHECK BACK SOON!</p>
             )}
           </div>
         </div>
@@ -53,7 +80,7 @@ export default function TourPage() {
       {/* Footer */}
       <footer style={{ padding: '4rem 0', borderTop: '1px solid var(--glass-border)', textAlign: 'center', background: '#000' }}>
         <div className="container">
-          <h2 style={{ color: 'var(--accent-gold)', marginBottom: '1rem' }}>DJ SAMBAT</h2>
+          <h2 style={{ color: 'var(--accent-gold)', marginBottom: '1rem', fontWeight: 900 }}>DJ SAMBAT</h2>
           <p style={{ color: '#666', fontSize: '0.8rem' }}>© 2026 DJ SAMBAT ENTERTAINMENT. ALL RIGHTS RESERVED.</p>
         </div>
       </footer>
