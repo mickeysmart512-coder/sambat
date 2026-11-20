@@ -5,73 +5,132 @@ import Link from 'next/link';
 export default function TourDates() {
   const [tours, setTours] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [whatsappNumber, setWhatsappNumber] = useState('2348000000000');
 
   useEffect(() => {
-    fetch('/api/tours')
-      .then(res => res.json())
-      .then(data => {
-        if (Array.isArray(data)) {
-          setTours(data.slice(0, 5));
+    Promise.all([
+      fetch('/api/tours').then(res => res.json()),
+      fetch('/api/settings').then(res => res.json())
+    ])
+      .then(([tourData, settingsData]) => {
+        if (Array.isArray(tourData)) {
+          setTours(tourData.slice(0, 5));
+        }
+        if (settingsData?.whatsapp_number) {
+          setWhatsappNumber(settingsData.whatsapp_number);
         }
         setLoading(false);
       })
       .catch(() => setLoading(false));
   }, []);
 
+  const handleTicketClick = (tour: any) => {
+    if (tour.status === 'SOLD OUT') return;
+    const cleanNum = whatsappNumber.replace(/[^0-9]/g, '');
+    const msg = encodeURIComponent(`Hi Sambat, I'd like to get VIP tickets / passes for the ${tour.city} show at ${tour.venue} (${tour.date}).`);
+    window.open(`https://wa.me/${cleanNum}?text=${msg}`, '_blank');
+  };
+
   if (loading) return null;
 
   return (
-    <section id="tour" className="section-padding" style={{ background: '#000' }}>
+    <section id="tour" className="section-padding" style={{ background: '#070709', position: 'relative' }}>
       <div className="container">
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '5rem' }}>
+        
+        {/* Section Header */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '4rem', flexWrap: 'wrap', gap: '1.5rem' }}>
           <div>
-            <h2 style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', fontWeight: 900, marginBottom: '1rem' }}>
+            <div className="badge-live" style={{ marginBottom: '0.8rem' }}>
+              <span className="pulse-dot" />
+              <span>LIVE SHOW SCHEDULE</span>
+            </div>
+            <h2 style={{ fontSize: 'clamp(2.2rem, 5vw, 3.8rem)', marginBottom: '0.8rem', letterSpacing: '-0.02em' }}>
               UPCOMING <span className="neon-text-gold">TOUR DATES</span>
             </h2>
-            <p style={{ color: '#888' }}>Catch the energy live in your city. Premium club nights and festivals.</p>
+            <p style={{ color: '#aaa', fontSize: '1.05rem', maxWidth: '580px' }}>
+              Experience the energy live in your city. Catch DJ Sambat headlining clubs, festivals, and arena stages.
+            </p>
           </div>
-          <Link href="/tour" className="btn-neon-outline" style={{ padding: '0.8rem 1.5rem', fontSize: '0.7rem' }}>VIEW ALL DATES</Link>
+          <Link href="/tour" className="btn-neon-outline">
+            VIEW ALL DATES &amp; VENUES →
+          </Link>
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
-          {tours.map((tour, idx) => (
-            <div key={idx} className="fade-in" style={{ 
-              display: 'grid', 
-              gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', 
-              gap: '2rem',
-              padding: '2.5rem 0',
-              borderBottom: '1px solid var(--glass-border)',
-              alignItems: 'center',
-              animationDelay: `${idx * 0.1}s`
-            }}>
-              <div>
-                <span style={{ 
-                  color: 'var(--accent-gold)', 
-                  fontWeight: 900, 
-                  fontSize: '0.9rem',
-                  letterSpacing: '0.1em'
-                }}>{tour.date}</span>
-              </div>
-              <div>
-                <h3 style={{ fontSize: '1.5rem', fontWeight: 900 }}>{tour.city}</h3>
-                <p style={{ color: '#666', fontSize: '0.8rem', marginTop: '0.3rem' }}>{tour.venue}</p>
-              </div>
-              <div style={{ textAlign: 'right' }}>
-                <Link 
-                  href={tour.ticketLink || "#"} 
-                  className={tour.status === "SOLD OUT" ? "btn-secondary" : "btn-primary"}
+        {/* Tour List */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          {tours.length === 0 ? (
+            <div className="glass-card" style={{ padding: '3rem', textAlign: 'center' }}>
+              <p style={{ color: '#888', fontSize: '1.1rem' }}>New tour dates are being finalized for this season. Check back shortly!</p>
+            </div>
+          ) : (
+            tours.map((tour, idx) => {
+              const isSoldOut = (tour.status || '').toUpperCase() === 'SOLD OUT';
+              const isLive = (tour.status || '').toUpperCase() === 'LIVE';
+
+              return (
+                <div 
+                  key={tour.id || idx} 
+                  className="glass-card" 
                   style={{ 
-                    padding: '0.6rem 1.8rem', 
-                    fontSize: '0.75rem',
-                    opacity: tour.status === "SOLD OUT" ? 0.5 : 1,
-                    pointerEvents: tour.status === "SOLD OUT" ? 'none' : 'auto'
+                    display: 'grid', 
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', 
+                    gap: '1.5rem',
+                    padding: '2rem 2.5rem',
+                    alignItems: 'center',
+                    borderLeft: isSoldOut ? '4px solid #555' : isLive ? '4px solid #10B981' : '4px solid var(--accent-gold)'
                   }}
                 >
-                  {tour.status === "SOLD OUT" ? "SOLD OUT" : "GET TICKETS"}
-                </Link>
-              </div>
-            </div>
-          ))}
+                  <div>
+                    <span style={{ 
+                      color: isSoldOut ? '#888' : 'var(--accent-gold)', 
+                      fontWeight: 900, 
+                      fontSize: '1.1rem',
+                      letterSpacing: '0.08em'
+                    }}>
+                      {tour.date}
+                    </span>
+                    <div style={{ fontSize: '0.75rem', color: '#666', marginTop: '0.2rem' }}>2026 TOUR</div>
+                  </div>
+
+                  <div>
+                    <h3 style={{ fontSize: '1.4rem', fontWeight: 900, color: '#fff' }}>{tour.city}</h3>
+                    <p style={{ color: '#888', fontSize: '0.85rem', marginTop: '0.2rem' }}>{tour.venue}</p>
+                  </div>
+
+                  <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <span style={{
+                      padding: '0.35rem 0.9rem',
+                      borderRadius: '50px',
+                      fontSize: '0.75rem',
+                      fontWeight: 800,
+                      letterSpacing: '0.05em',
+                      background: isSoldOut ? 'rgba(255,255,255,0.06)' : isLive ? 'rgba(16, 185, 129, 0.15)' : 'rgba(0, 242, 255, 0.12)',
+                      color: isSoldOut ? '#888' : isLive ? '#10B981' : 'var(--accent-blue)',
+                      border: isSoldOut ? '1px solid #444' : isLive ? '1px solid rgba(16, 185, 129, 0.3)' : '1px solid rgba(0, 242, 255, 0.3)'
+                    }}>
+                      {tour.status}
+                    </span>
+                  </div>
+
+                  <div style={{ textAlign: 'right' }}>
+                    <button 
+                      onClick={() => handleTicketClick(tour)}
+                      disabled={isSoldOut}
+                      className={isSoldOut ? "btn-secondary" : "btn-primary"}
+                      style={{ 
+                        padding: '0.7rem 2rem', 
+                        fontSize: '0.8rem',
+                        opacity: isSoldOut ? 0.5 : 1,
+                        cursor: isSoldOut ? 'not-allowed' : 'pointer'
+                      }}
+                    >
+                      {isSoldOut ? "SOLD OUT" : "GET PASSES"}
+                    </button>
+                  </div>
+                </div>
+              );
+            })
+          )}
         </div>
       </div>
     </section>
