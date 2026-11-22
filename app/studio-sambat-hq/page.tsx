@@ -30,7 +30,8 @@ export default function AdminDashboard() {
     date: '',
     city: '',
     venue: '',
-    status: 'TICKETS'
+    status: 'TICKETS', ticketingEnabled: true, ticketMode: 'PLATFORM_DEFAULT', currency: 'NGN', perOrderLimit: 6,
+    ticketTiers: '[{"name":"General admission","price":0,"quantity":0,"description":""}]'
   });
 
   const supabase = createClient();
@@ -116,13 +117,15 @@ export default function AdminDashboard() {
   const handleAddTour = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!newTour.date || !newTour.city || !newTour.venue) return;
+    let ticketTiers: unknown;
+    try { ticketTiers = JSON.parse(newTour.ticketTiers); } catch { alert('Ticket tiers must be valid JSON.'); return; }
     const res = await fetch('/api/tours', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(newTour)
+      body: JSON.stringify({ ...newTour, ticketTiers })
     });
     if (res.ok) {
-      setNewTour({ date: '', city: '', venue: '', status: 'TICKETS' });
+      setNewTour({ date: '', city: '', venue: '', status: 'TICKETS', ticketingEnabled: true, ticketMode: 'PLATFORM_DEFAULT', currency: 'NGN', perOrderLimit: 6, ticketTiers: '[{"name":"General admission","price":0,"quantity":0,"description":""}]' });
       fetchData();
     }
   };
@@ -402,6 +405,13 @@ export default function AdminDashboard() {
                     </select>
                   </div>
                   <div style={{ gridColumn: '1 / -1', marginTop: '0.5rem' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem', marginBottom: '1rem' }}>
+                      <label style={{ fontSize: '0.75rem', color: 'var(--accent-gold)', fontWeight: 800 }}><input type="checkbox" checked={newTour.ticketingEnabled} onChange={e => setNewTour({ ...newTour, ticketingEnabled: e.target.checked })} style={{ width: 'auto', marginRight: '.5rem' }} /> TICKETING ON</label>
+                      <label style={{ fontSize: '0.75rem', color: 'var(--accent-gold)', fontWeight: 800 }}>TICKET MODE<select value={newTour.ticketMode} onChange={e => setNewTour({ ...newTour, ticketMode: e.target.value })} style={inputStyle}><option value="PLATFORM_DEFAULT">Platform default ticket</option><option value="EVENT_TICKET">Use event ticket</option></select></label>
+                      <label style={{ fontSize: '0.75rem', color: 'var(--accent-gold)', fontWeight: 800 }}>CURRENCY<input value={newTour.currency} onChange={e => setNewTour({ ...newTour, currency: e.target.value })} style={inputStyle} /></label>
+                      <label style={{ fontSize: '0.75rem', color: 'var(--accent-gold)', fontWeight: 800 }}>ORDER LIMIT<input type="number" min="1" value={newTour.perOrderLimit} onChange={e => setNewTour({ ...newTour, perOrderLimit: Number(e.target.value) })} style={inputStyle} /></label>
+                    </div>
+                    <label style={{ fontSize: '0.75rem', color: 'var(--accent-gold)', fontWeight: 800 }}>TICKET TIERS (JSON: name, price, quantity, imageUrl, description/perks)<textarea rows={4} value={newTour.ticketTiers} onChange={e => setNewTour({ ...newTour, ticketTiers: e.target.value })} style={inputStyle} /></label>
                     <button type="submit" className="btn-primary" style={{ width: '100%' }}>+ ADD TOUR DATE</button>
                   </div>
                 </form>

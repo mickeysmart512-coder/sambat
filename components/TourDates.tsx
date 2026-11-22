@@ -5,36 +5,22 @@ import Link from 'next/link';
 export default function TourDates() {
   const [tours, setTours] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const [whatsappNumber, setWhatsappNumber] = useState('2348000000000');
 
   useEffect(() => {
-    Promise.all([
-      fetch('/api/tours').then(res => res.json()),
-      fetch('/api/settings').then(res => res.json())
-    ])
-      .then(([tourData, settingsData]) => {
+    fetch('/api/tours').then(res => res.json())
+      .then(tourData => {
         if (Array.isArray(tourData)) {
           setTours(tourData.slice(0, 5));
-        }
-        if (settingsData?.whatsapp_number) {
-          setWhatsappNumber(settingsData.whatsapp_number);
         }
         setLoading(false);
       })
       .catch(() => setLoading(false));
   }, []);
 
-  const handleTicketClick = (tour: any) => {
-    if (tour.status === 'SOLD OUT') return;
-    const cleanNum = whatsappNumber.replace(/[^0-9]/g, '');
-    const msg = encodeURIComponent(`Hi Sambat, I'd like to get VIP tickets / passes for the ${tour.city} show at ${tour.venue} (${tour.date}).`);
-    window.open(`https://wa.me/${cleanNum}?text=${msg}`, '_blank');
-  };
-
   if (loading) return null;
 
   return (
-    <section id="tour" className="section-padding" style={{ background: '#070709', position: 'relative' }}>
+    <section id="tour" className="section-padding ambient-stage" style={{ position: 'relative' }}>
       <div className="container">
         
         {/* Section Header */}
@@ -113,9 +99,9 @@ export default function TourDates() {
                   </div>
 
                   <div style={{ textAlign: 'right' }}>
-                    <button 
-                      onClick={() => handleTicketClick(tour)}
-                      disabled={isSoldOut}
+                    <Link
+                      href="/tour"
+                      aria-disabled={isSoldOut}
                       className={isSoldOut ? "btn-secondary" : "btn-primary"}
                       style={{ 
                         padding: '0.7rem 2rem', 
@@ -125,7 +111,7 @@ export default function TourDates() {
                       }}
                     >
                       {isSoldOut ? "SOLD OUT" : "GET PASSES"}
-                    </button>
+                    </Link>
                   </div>
                 </div>
               );

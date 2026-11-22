@@ -42,14 +42,106 @@ model Booking {
 }
 
 model Tour {
-  id        String   @id @default(cuid())
-  date      String   // For display: e.g., "MAY 15"
-  dateTime  DateTime? // For dynamic live logic
-  city      String
-  venue     String
-  status    String   @default("TICKETS") // TICKETS, SOLD OUT, LIVE
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id           String        @id @default(cuid())
+  date         String        // For display: e.g., "MAY 15"
+  dateTime     DateTime?     // For dynamic live logic
+  city         String
+  venue        String
+  status       String        @default("TICKETS") // TICKETS, SOLD OUT, LIVE
+  ticketType   String        @default("DEFAULT") // "DEFAULT" or "CUSTOM"
+  ticketImage  String?       // Custom event designed ticket image URL
+  legacyTicketTiers String? @map("ticketTiers") // legacy JSON data
+  ticketOrders TicketOrder[]
+  ticketTiers  TicketTier[]
+  orders       Order[]
+  ticketingEnabled Boolean @default(true)
+  ticketMode   String      @default("PLATFORM_DEFAULT") // PLATFORM_DEFAULT, EVENT_TICKET
+  currency     String      @default("NGN")
+  saleStartsAt DateTime?
+  saleEndsAt   DateTime?
+  perOrderLimit Int        @default(6)
+  soldOutMessage String?   @default("This show is currently sold out.")
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+model TicketTier {
+  id          String   @id @default(cuid())
+  tourId      String
+  tour        Tour     @relation(fields: [tourId], references: [id], onDelete: Cascade)
+  name        String
+  description String?
+  perks       String?
+  imageUrl    String?
+  price       Float
+  quantity    Int
+  sold        Int      @default(0)
+  perOrderLimit Int?
+  sortOrder   Int      @default(0)
+  orderItems  OrderItem[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Order {
+  id             String   @id @default(cuid())
+  reference      String   @unique
+  idempotencyKey String   @unique
+  tourId         String
+  tour           Tour     @relation(fields: [tourId], references: [id])
+  buyerName      String
+  email          String
+  phone          String
+  notes          String?
+  currency       String
+  amount         Float
+  status         String   @default("PENDING") // PENDING, PAID, FULFILLED, FAILED, CANCELLED
+  paymentStatus  String   @default("PENDING")
+  paymentRef     String?
+  items          OrderItem[]
+  notifications  NotificationLog[]
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model OrderItem {
+  id         String     @id @default(cuid())
+  orderId    String
+  order      Order      @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  ticketTierId String
+  ticketTier TicketTier @relation(fields: [ticketTierId], references: [id])
+  tierName   String
+  unitPrice  Float
+  quantity   Int
+  createdAt  DateTime   @default(now())
+}
+
+model NotificationLog {
+  id          String   @id @default(cuid())
+  orderId     String
+  order       Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  channel     String
+  status      String   @default("PENDING") // PENDING, SENT, FAILED
+  attempts    Int      @default(0)
+  lastError   String?
+  deliveredAt DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model TicketOrder {
+  id           String   @id @default(cuid())
+  tourId       String
+  tour         Tour     @relation(fields: [tourId], references: [id], onDelete: Cascade)
+  customerName String
+  email        String
+  phone        String
+  tierName     String
+  quantity     Int      @default(1)
+  totalPrice   Float
+  ticketCode   String   @unique
+  status       String   @default("CONFIRMED") // CONFIRMED, CANCELLED
+  createdAt    DateTime @default(now())
 }
 
 model StatePrice {
@@ -84,4 +176,3 @@ model Catalog {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
-

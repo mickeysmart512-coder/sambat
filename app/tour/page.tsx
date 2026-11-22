@@ -1,10 +1,11 @@
 'use client';
 import Navigation from '@/components/Navigation';
 import { useState, useEffect } from 'react';
+import TicketCheckout from '@/components/TicketCheckout';
 
 export default function TourPage() {
   const [tours, setTours] = useState<any[]>([]);
-  const [whatsappNumber, setWhatsappNumber] = useState('2348000000000');
+  const [selectedTour, setSelectedTour] = useState<any>(null);
 
   useEffect(() => {
     fetch('/api/tours')
@@ -12,18 +13,11 @@ export default function TourPage() {
       .then(data => setTours(Array.isArray(data) ? data : []))
       .catch(err => console.error(err));
 
-    fetch('/api/settings')
-      .then(res => res.json())
-      .then(data => {
-        if (data?.whatsapp_number) setWhatsappNumber(data.whatsapp_number);
-      })
-      .catch(() => {});
   }, []);
 
   const handleTicketClick = (tour: any) => {
     if (tour.status === 'SOLD OUT') return;
-    const msg = encodeURIComponent(`Hi Sambat, I'd like to secure VIP / tickets for your show in ${tour.city} at ${tour.venue} (${tour.date}).`);
-    window.open(`https://wa.me/${whatsappNumber.replace(/[^0-9]/g, '')}?text=${msg}`, '_blank');
+    setSelectedTour(tour);
   };
 
   return (
@@ -77,6 +71,7 @@ export default function TourPage() {
         </div>
       </section>
 
+      {selectedTour && <TicketCheckout tour={selectedTour} onClose={() => setSelectedTour(null)} />}
       {/* Footer */}
       <footer style={{ padding: '4rem 0', borderTop: '1px solid var(--glass-border)', textAlign: 'center', background: '#000' }}>
         <div className="container">

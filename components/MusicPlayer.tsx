@@ -53,7 +53,7 @@ export default function MusicPlayer() {
   };
 
   return (
-    <section id="music" className="section-padding">
+    <section id="music" className="section-padding ambient-stage">
       <div className="container">
         <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
           <h2 style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', fontWeight: 900, marginBottom: '1rem' }}>
